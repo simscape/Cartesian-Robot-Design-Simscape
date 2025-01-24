@@ -60,6 +60,7 @@ classdef  MountComponentTest< matlab.unittest.TestCase
             % and errors for default values.
             set_param(test.blockpath,'typeMount',mountType)
             set_param(test.blockpath,'typeInertiaMount',inertiaType);
+            set_param(test.modelname,'SimMechanicsOpenEditorOnUpdate','off');
             set_param(test.modelname,'SimulationCommand','update');
 
             % Verify that the simulation is error and/or warnings free
@@ -73,7 +74,8 @@ classdef  MountComponentTest< matlab.unittest.TestCase
             % corresponding sub system blocks.
             set_param(test.blockpath,'typeMount',mountType)
             set_param(test.blockpath,'typeInertiaMount','Custom');
-            set_param(test.modelname,'SimulationCommand','update');
+            set_param(test.modelname,'SimMechanicsOpenEditorOnUpdate','off');
+            set_param(test.modelname,'SimulationCommand','update');          
 
             % Verify
             verifyInertiaTypeUpdateInCorrespondingSubsystemBlock(test,mountType);
@@ -85,6 +87,7 @@ classdef  MountComponentTest< matlab.unittest.TestCase
             % and errors for user-defined values.
 
             set_param(test.blockpath,'typeMount',mountType);
+            set_param(test.modelname,'SimMechanicsOpenEditorOnUpdate','off');
             verifyWarningAndErrorFreeSimulation(test,mountType);           
         end
 
@@ -126,12 +129,14 @@ classdef  MountComponentTest< matlab.unittest.TestCase
             switch mountType
                 case 'Plate Mount'
                     set_param(test.blockpath,'widthMount','0.01');
+                    set_param(test.modelname,'SimMechanicsOpenEditorOnUpdate','off');
                     test.verifyWarningFree(@()sim(test.modelname),...
                         ['The model with block- ''', test.blockname, ''' with configuration',mountType,'should simulate without any errors and/or warnings.']);
 
                 case 'L-shaped mount'
                     set_param(test.blockpath,'widthMount','0.02');
                     set_param(test.blockpath,'angleRotate','40');
+                    set_param(test.modelname,'SimMechanicsOpenEditorOnUpdate','off');
                     test.verifyWarningFree(@()sim(test.modelname),...
                         ['The model with block- ''', test.blockname, ''' with configuration',mountType,'should simulate without any errors and/or warnings.']);
 
@@ -139,6 +144,7 @@ classdef  MountComponentTest< matlab.unittest.TestCase
                     set_param(test.blockpath,'widthMount','0.03');
                     set_param(test.blockpath,'angleRotate','40');
                     set_param(test.blockpath,'angleMount','120');
+                    set_param(test.modelname,'SimMechanicsOpenEditorOnUpdate','off');
                     test.verifyWarningFree(@()sim(test.modelname),...
                         ['The model with block- ''', test.blockname, ''' with configuration',mountType,'should simulate without any errors and/or warnings.']);
             end

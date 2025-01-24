@@ -74,7 +74,8 @@ classdef LinearStageComponentTest < matlab.unittest.TestCase
             set_param(test.blockpath,'typeInertiaCarriage',inertiaCarraige)
             set_param(test.blockpath,'systemGuide',systemGuide);
             set_param(test.blockpath,'axisGuide',axisGuide);
-            set_param(test.modelname,'SimulationCommand','update');
+            set_param(test.modelname,'SimMechanicsOpenEditorOnUpdate','off');
+            set_param(test.modelname,'SimulationCommand','update');           
 
             % Verify that the simulation is error and/or warnings free
             test.verifyWarningFree(@()sim(test.modelname),...
@@ -90,7 +91,9 @@ classdef LinearStageComponentTest < matlab.unittest.TestCase
             set_param(test.blockpath,'systemGuide',systemGuide);
             set_param(test.blockpath,'axisGuide',axisGuide);
             setParametersForTheBlock(test,inertiaGuide,inertiaCarraige,systemGuide);
+            set_param(test.modelname,'SimMechanicsOpenEditorOnUpdate','off');
             set_param(test.modelname,'SimulationCommand','update');
+            
 
              % Verify that the simulation is error and/or warnings free
             test.verifyWarningFree(@()sim(test.modelname),...

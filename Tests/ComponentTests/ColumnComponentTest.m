@@ -56,8 +56,9 @@ classdef ColumnComponentTest < matlab.unittest.TestCase
             % (containing the column block) simulates without any warnings
             % and errors for default values.
             set_param(test.blockpath,'typeInertiaColumn',inertiaType);
+            set_param(test.modelname,'SimMechanicsOpenEditorOnUpdate','off');
             set_param(test.modelname,'SimulationCommand','update');
-
+            
             % Verify that the simulation is error and/or warnings free
             test.verifyWarningFree(@()sim(test.modelname),...
                 ['The model with block- ''', test.blockname, ''' should simulate without any errors and/or warnings.']);        
@@ -67,6 +68,7 @@ classdef ColumnComponentTest < matlab.unittest.TestCase
             % This test verifies that changing the inertia type from
             % "calculate from geometry" to "Custom" updates the
             % corresponding sub system blocks.
+            set_param(test.modelname,'SimMechanicsOpenEditorOnUpdate','off');
             set_param(test.blockpath,'typeInertiaColumn','Custom');
             set_param(test.modelname,'SimulationCommand','update');
 
@@ -100,6 +102,7 @@ classdef ColumnComponentTest < matlab.unittest.TestCase
             set_param(test.blockpath,'widthColumn','0.01');
             set_param(test.blockpath,'lengthColumn','0.3');
             set_param(test.modelname,'SimulationCommand','update');
+            set_param(test.modelname,'SimMechanicsOpenEditorOnUpdate','off');
 
             % Verify that the simulation is error and/or warnings free
             test.verifyWarningFree(@()sim(test.modelname),...
