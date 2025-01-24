@@ -16,7 +16,7 @@ with a system-level analysis to evaluate your options.
 
 [![View Cartesian Robot Design with Simscape on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/cartesian-robot-design-with-simscape)
 
-[![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=simscape/Cartesian-Robot-Simscape)
+[![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=simscape/Cartesian-Robot-Design-Simscape)
 
 This project contains a system-level simplified parametric Cartesian robot 
 model for 3D printing operation. Run this model for Cantilever Cartesian or 
