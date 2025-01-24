@@ -1,0 +1,242 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      -->
+<title>Cartesian Robot Design with Simscape</title>
+<meta name="generator" content="MATLAB 24.1">
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.date" content="2025-01-15">
+<meta name="DC.source" content="CartesianRobotDesignOverview.m">
+<style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style>
+</head>
+<body>
+<div class="content">
+<h1>Cartesian Robot Design with Simscape</h1>
+<!--introduction-->
+<p>This project contains custom libraries, models and code to help you design Cartesian robots. You can learn to perform a positional accuracy analysis for a 3D printing operation.</p>
+<!--/introduction-->
+<h2>Contents</h2>
+<div>
+<ul>
+<li>
+<a href="#1">Cartesian Robot For 3D Printing Operation</a>
+</li>
+<li>
+<a href="#2">Design Your Own Cartesian Robot</a>
+</li>
+<li>
+<a href="#3">Workflows</a>
+</li>
+<li>
+<a href="#4">Model</a>
+</li>
+</ul>
+</div>
+<h2 id="1">Cartesian Robot For 3D Printing Operation</h2>
+<p>Cartesian robots operate on three linear axes (X, Y, and Z). They are widely used in applications such as CNC machining, 3D printing, and automated assembly due to their straightforward movement and control. The development of Cartesian robots involves the design, control, and implementation of mechanical systems capable of performing precise tasks. Mechanical designers often use Computer-Aided Design (CAD) models to evaluate a design. To meet all the functional requirements, the CAD design process is generally iterative and can be time consuming. You can accelerate the development process by starting with a system-level analysis to evaluate your options. This project shows how to create a system-level simplified parametric robot model using Simscape Multibody&trade;.</p>
+<div>
+<ul>
+<li>To open the Cartesian robot model for 3D printing application, click <a href="matlab:open_system('XYZCartesianRobot3DPrinting.slx')">3D Printing XYZ Cartesian Robot Model</a>.</li>
+</ul>
+</div>
+<p>
+<img vspace="5" hspace="5" src="CartesianRobotModel.png" alt=""> </p>
+<div>
+<ul>
+<li>You can configure the robot subsystem for Cantilever Cartesian robot or Gantry robot and tune controllers accordingly. You can define your own custom trajectory and analyze the path tracing for 3D printing operation.</li>
+<li>You can compare measured axis positions with target values using the Scope block called Axis Positions on model canvas.</li>
+<li>To learn how to determine positional accuracy for a 3D printing operation using a Simscape model, see <a href="matlab:open('PositionalAccuracyAnalysis.mlx')">Perform Positional Accuracy Analysis for a 3D Printing Cartesian Robot</a>.</li>
+</ul>
+</div>
+<p>To design your own Cartesian robot, you can leverage the existing custom library blocks or create your new custom blocks. To learn more on how to do that, go to the next section and follow the 3-step process. You will also learn how to tune the control system to achieve high positional accuracy for 3D printing.</p>
+<h2 id="2">Design Your Own Cartesian Robot</h2>
+<p>This section shows you how to build and parameterize components, assemble them to build a Cartesian robot, and verify a final design for a 3D printing application. Follow these steps to design a Cartesian robot.</p>
+<p>1. <b>Design Components:</b> The project contains custom library blocks such as <a href="matlab:web('DocumentationLinearStage.html','-new')">Linear Stage</a>, <a href="matlab:web('DocumentationColumn.html','-new')">Column</a>, <a href="matlab:web('DocumentationMount.html','-new')">Mount</a>. The custom library blocks serve as early-stage or system-level mechanical design tools for quick prototyping and development of a simplified parametric Cartesian robot. The custom library blocks use the foundation of Simscape Multibody. You can parameterize custom library blocks to suit your application.</p>
+<p>2. <b>Assemble Robot from Components:</b> Assemble the parameterized blocks to build integrated robot models with tools or end effectors. You can build robot models of various configurations like Cantilever Cartesian robot and Gantry robot. You can represent the payloads and operating environment using Simscape Multibody. You can also use Simscape Multibody in MATLAB&reg; classes to assemble and visualize a robot. To assemble, visualize and scale a Cartesian robot model using Simscape Multibody in MATLAB classes, see <a href="matlab:open('ProgrammaticCartesianRobotModelDevelopment.mlx')">Develop a Cartesian Robot Model Programmatically</a>.</p>
+<p>3. <b>Perform Positional Accuracy Analysis for 3D Printing:</b> You can use a robot model with electric actuation and control system to perform a task. To determine the positional accuracy of the robot performing a 3D printing, see <a href="matlab:open('PositionalAccuracyAnalysis.mlx')">Perform Positional Accuracy Analysis for a 3D Printing Cartesian Robot</a>.</p>
+<h2 id="3">Workflows</h2>
+<div>
+<ul>
+<li>
+<a href="matlab:open('ProgrammaticCartesianRobotModelDevelopment.mlx')">Develop a Cartesian Robot Model Programmatically</a>
+</li>
+<li>
+<a href="matlab:open('PositionalAccuracyAnalysis.mlx')">Perform Positional Accuracy Analysis for a 3D Printing Cartesian Robot</a>
+</li>
+</ul>
+</div>
+<h2 id="4">Model</h2>
+<div>
+<ul>
+<li>
+<a href="matlab:open_system('XYZCartesianRobot3DPrinting.slx')">3D Printing XYZ Cartesian Robot Model</a>
+</li>
+</ul>
+</div>
+<p class="footer">Copyright 2024 The MathWorks, Inc.<br>
+<a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2024a</a>
+<br>
+</p>
+</div>
+<!--
+##### SOURCE BEGIN #####
+%% Cartesian Robot Design with Simscape
+% 
+% This project contains custom libraries, models and code to help 
+% you design Cartesian robots. You can learn to perform a positional 
+% accuracy analysis for a 3D printing operation.
+%
+
+% Copyright 2024 The MathWorks, Inc.
+
+%% Cartesian Robot For 3D Printing Operation
+%
+% Cartesian robots operate on three linear axes (X, Y, and Z). They are 
+% widely used in applications such as CNC machining, 3D printing, and 
+% automated assembly due to their straightforward movement and control. 
+% The development of Cartesian robots involves the 
+% design, control, and implementation of mechanical systems capable of 
+% performing precise tasks. Mechanical designers often use Computer-Aided 
+% Design (CAD) models to evaluate a design. To meet all the functional 
+% requirements, the CAD design process is generally iterative and can be 
+% time consuming. You can accelerate the development process by starting 
+% with a system-level analysis to evaluate your options. This project shows 
+% how to create a system-level simplified parametric robot model using 
+% Simscape Multibody(TM).
+%
+% * To open the Cartesian robot model for 3D printing application, click
+% <matlab:open_system('XYZCartesianRobot3DPrinting.slx') 3D Printing XYZ 
+% Cartesian Robot Model>.
+% 
+% <<CartesianRobotModel.png>>
+% 
+% * You can configure the robot subsystem for Cantilever Cartesian robot or
+% Gantry robot and tune controllers accordingly. You can define your own 
+% custom trajectory and analyze the path tracing for 3D printing operation.
+% * You can compare measured axis positions with target values 
+% using the Scope block called Axis Positions on model canvas.
+% * To learn how to determine positional accuracy for a 3D printing 
+% operation using a Simscape model, see 
+% <matlab:open('PositionalAccuracyAnalysis.mlx') Perform Positional Accuracy 
+% Analysis for a 3D Printing Cartesian Robot>.
+%
+% To design your own Cartesian robot, you can leverage the existing 
+% custom library blocks or create your new custom blocks. To learn more on 
+% how to do that, go to the next section and follow the 3-step process. You 
+% will also learn how to tune the control system to achieve high positional 
+% accuracy for 3D printing.
+%
+%% Design Your Own Cartesian Robot
+% 
+% This section shows you how to build and 
+% parameterize components, assemble them to build a Cartesian robot, and 
+% verify a final design for a 3D printing application. Follow these 
+% steps to design a Cartesian robot.
+%
+% 1. *Design Components:* The project contains custom library blocks such 
+% as <matlab:web('DocumentationLinearStage.html','-new') Linear Stage>, 
+% <matlab:web('DocumentationColumn.html','-new') Column>, 
+% <matlab:web('DocumentationMount.html','-new') Mount>. The custom library blocks 
+% serve as early-stage or system-level mechanical design tools for 
+% quick prototyping and development of a simplified parametric Cartesian 
+% robot. The custom library blocks use the foundation of Simscape Multibody. 
+% You can parameterize custom library blocks to suit your application.
+%
+% 2. *Assemble Robot from Components:* Assemble the parameterized blocks to 
+% build integrated robot models with tools or end effectors. You can build 
+% robot models of various configurations like Cantilever Cartesian robot 
+% and Gantry robot. You can represent the payloads and operating environment 
+% using Simscape Multibody. You can also use Simscape Multibody in MATLAB(R) 
+% classes to assemble and visualize a robot. To assemble, visualize and scale a 
+% Cartesian robot model using Simscape Multibody in MATLAB classes, see 
+% <matlab:open('ProgrammaticCartesianRobotModelDevelopment.mlx') Develop a 
+% Cartesian Robot Model Programmatically>.
+%
+% 3. *Perform Positional Accuracy Analysis for 3D Printing:* You can use a 
+% robot model with electric actuation and control system to perform a task. 
+% To determine the positional accuracy of the robot performing a 3D 
+% printing, see <matlab:open('PositionalAccuracyAnalysis.mlx') Perform 
+% Positional Accuracy Analysis for a 3D Printing Cartesian Robot>.
+% 
+%% Workflows  
+%
+% * <matlab:open('ProgrammaticCartesianRobotModelDevelopment.mlx') Develop a 
+% Cartesian Robot Model Programmatically>
+% * <matlab:open('PositionalAccuracyAnalysis.mlx') Perform 
+% Positional Accuracy Analysis for a 3D Printing Cartesian Robot>
+%
+%% Model
+%
+% * <matlab:open_system('XYZCartesianRobot3DPrinting.slx') 3D Printing XYZ 
+% Cartesian Robot Model>
+%
+
+##### SOURCE END #####
+-->
+</body>
+</html>
