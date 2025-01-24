@@ -10,6 +10,8 @@ classdef PositionalAccuracyAnalysisWorkflowTest < InitializeTestForWorkflows & m
         function TestPositionalAccuracyAnalysisMLX(test)
             %The test runs the |.mlx| file and makes sure that there are
             %no errors or warning thrown.
+            modelname = "XYZCartesianRobot3DPrinting";
+            set_param(modelname,'SimMechanicsOpenEditorOnUpdate','off');
             test.verifyWarningFree(@()runPositionalAccuracyAnalysis,...
                 '''PositionalAccuracyAnalysis'' |.mlx|  should execute without any warnings or errors.');
 
